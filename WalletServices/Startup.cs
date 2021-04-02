@@ -12,6 +12,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using WalletServices.Data;
+using WalletServices.Extensions;
 
 namespace WalletServices
 {
@@ -27,9 +30,11 @@ namespace WalletServices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
-                .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
+            
             services.AddControllers();
+
+            services.AddDbContext<DataContext>(o => o.UseSqlServer(""));
+            services.AddIdentityConfiguring();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
