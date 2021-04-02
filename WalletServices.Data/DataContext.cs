@@ -12,6 +12,11 @@ namespace WalletServices.Data
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Product> Products { get; set; }
 
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+        }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
